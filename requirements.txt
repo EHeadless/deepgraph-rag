@@ -1,0 +1,8 @@
+streamlit==1.31.0
+neo4j==5.16.0
+openai==1.54.5
+python-dotenv==1.0.0
+pyvis==0.3.2
+arxiv==2.1.0
+tqdm==4.67.1
+numpy==1.26.4
