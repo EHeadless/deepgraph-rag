@@ -1,80 +1,104 @@
 {
   "summary": {
-    "total_queries": 21,
-    "vector_answerable": 3,
-    "graph_answerable": 21,
-    "graph_only": 18,
-    "vector_coverage": 14.3,
-    "graph_coverage": 100.0,
-    "graph_advantage": 85.7
+    "total_queries": 65,
+    "vector_answerable": 10,
+    "graph_answerable": 65,
+    "graph_only": 55,
+    "vector_coverage_pct": 15.4,
+    "graph_coverage_pct": 100.0,
+    "graph_advantage_pct": 84.6,
+    "queries_with_results": 53,
+    "empty_expected": 2,
+    "empty_unexpected": 10
   },
   "by_domain": {
     "research": {
-      "total": 7,
-      "vector_answerable": 1,
-      "graph_answerable": 7,
-      "graph_only": 6
+      "total": 20,
+      "vector_answerable": 4,
+      "graph_answerable": 20,
+      "graph_only": 16,
+      "successful": 12
     },
     "products": {
-      "total": 7,
-      "vector_answerable": 1,
-      "graph_answerable": 7,
-      "graph_only": 6
+      "total": 21,
+      "vector_answerable": 2,
+      "graph_answerable": 21,
+      "graph_only": 19,
+      "successful": 18
     },
     "neurology": {
-      "total": 7,
-      "vector_answerable": 1,
-      "graph_answerable": 7,
-      "graph_only": 6
+      "total": 24,
+      "vector_answerable": 4,
+      "graph_answerable": 24,
+      "graph_only": 20,
+      "successful": 23
     }
   },
   "by_query_type": {
     "similarity": {
-      "total": 4,
-      "vector_answerable": 3,
-      "graph_answerable": 4
+      "total": 8,
+      "vector_answerable": 8,
+      "graph_answerable": 8
     },
     "intersection": {
-      "total": 7,
+      "total": 18,
       "vector_answerable": 0,
-      "graph_answerable": 7
+      "graph_answerable": 18
     },
     "multi_hop": {
-      "total": 6,
+      "total": 14,
       "vector_answerable": 0,
-      "graph_answerable": 6
+      "graph_answerable": 14
     },
     "aggregation": {
+      "total": 14,
+      "vector_answerable": 0,
+      "graph_answerable": 14
+    },
+    "edge_cases": {
+      "total": 8,
+      "vector_answerable": 2,
+      "graph_answerable": 8
+    },
+    "comparison": {
       "total": 3,
       "vector_answerable": 0,
       "graph_answerable": 3
-    },
-    "comparison": {
-      "total": 1,
-      "vector_answerable": 0,
-      "graph_answerable": 1
     }
   },
   "detailed_results": [
     {
       "domain": "research",
       "query_type": "similarity",
-      "query_name": "topic_search",
+      "query_name": "topic_transformers",
       "natural_language": "Papers about transformer architectures",
       "vector_can_answer": true,
       "graph_can_answer": true,
       "graph_results": 20,
-      "graph_time_ms": 14.95
+      "graph_time_ms": 723.01,
+      "error": null
     },
     {
       "domain": "research",
       "query_type": "similarity",
-      "query_name": "author_papers",
-      "natural_language": "Papers by a specific author",
-      "vector_can_answer": false,
+      "query_name": "topic_llm",
+      "natural_language": "Papers about large language models",
+      "vector_can_answer": true,
       "graph_can_answer": true,
-      "graph_results": 0,
-      "graph_time_ms": 12.53
+      "graph_results": 20,
+      "graph_time_ms": 102.39,
+      "error": null
+    },
+    {
+      "domain": "research",
+      "query_type": "similarity",
+      "query_name": "topic_diffusion",
+      "natural_language": "Papers about diffusion models",
+      "vector_can_answer": true,
+      "graph_can_answer": true,
+      "graph_results": 20,
+      "graph_time_ms": 63.63,
+      "error": null
     },
     {
       "domain": "research",
@@ -84,37 +108,107 @@
       "vector_can_answer": false,
       "graph_can_answer": true,
       "graph_results": 0,
-      "graph_time_ms": 2.47
+      "graph_time_ms": 229.41,
+      "error": null
+    },
+    {
+      "domain": "research",
+      "query_type": "intersection",
+      "query_name": "method_x_concept_2",
+      "natural_language": "Papers using attention FOR multimodal tasks",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 0,
+      "graph_time_ms": 175.76,
+      "error": null
+    },
+    {
+      "domain": "research",
+      "query_type": "intersection",
+      "query_name": "method_x_concept_3",
+      "natural_language": "Papers using RL FOR robotics",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 0,
+      "graph_time_ms": 160.12,
+      "error": null
     },
     {
       "domain": "research",
       "query_type": "intersection",
       "query_name": "method_x_dataset",
-      "natural_language": "Papers using LoRA evaluated on MMLU",
+      "natural_language": "Papers using fine-tuning evaluated on ImageNet",
       "vector_can_answer": false,
       "graph_can_answer": true,
       "graph_results": 0,
-      "graph_time_ms": 2.14
+      "graph_time_ms": 65.22,
+      "error": null
+    },
+    {
+      "domain": "research",
+      "query_type": "intersection",
+      "query_name": "concept_x_concept",
+      "natural_language": "Papers about BOTH efficiency AND robustness",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 0,
+      "graph_time_ms": 42.46,
+      "error": null
     },
     {
       "domain": "research",
       "query_type": "multi_hop",
-      "query_name": "collaborator_network",
+      "query_name": "author_other_papers",
+      "natural_language": "Other papers by authors of paper X",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 1,
+      "graph_time_ms": 72.34,
+      "error": null
+    },
+    {
+      "domain": "research",
+      "query_type": "multi_hop",
+      "query_name": "coauthor_papers",
       "natural_language": "Papers by collaborators of author X",
       "vector_can_answer": false,
       "graph_can_answer": true,
       "graph_results": 0,
-      "graph_time_ms": 3.08
+      "graph_time_ms": 247.62,
+      "error": null
     },
     {
       "domain": "research",
       "query_type": "multi_hop",
       "query_name": "method_transfer",
-      "natural_language": "Methods from NLP used in computer vision",
+      "natural_language": "Methods used in both NLP and Vision papers",
       "vector_can_answer": false,
       "graph_can_answer": true,
       "graph_results": 10,
-      "graph_time_ms": 23.93
+      "graph_time_ms": 134.88,
+      "error": null
+    },
+    {
+      "domain": "research",
+      "query_type": "multi_hop",
+      "query_name": "concept_bridge",
+      "natural_language": "Authors who publish in multiple concept areas",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 10,
+      "graph_time_ms": 65.89,
+      "error": null
+    },
+    {
+      "domain": "research",
+      "query_type": "multi_hop",
+      "query_name": "citation_path",
+      "natural_language": "Path between two research areas",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 0,
+      "graph_time_ms": 25.6,
+      "error": null
     },
     {
       "domain": "research",
@@ -123,18 +217,97 @@
       "natural_language": "Most commonly used methods",
       "vector_can_answer": false,
       "graph_can_answer": true,
+      "graph_results": 15,
+      "graph_time_ms": 17.69,
+      "error": null
+    },
+    {
+      "domain": "research",
+      "query_type": "aggregation",
+      "query_name": "concept_popularity",
+      "natural_language": "Most researched concepts",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 15,
+      "graph_time_ms": 17.65,
+      "error": null
+    },
+    {
+      "domain": "research",
+      "query_type": "aggregation",
+      "query_name": "prolific_authors",
+      "natural_language": "Authors with most papers",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 15,
+      "graph_time_ms": 25.6,
+      "error": null
+    },
+    {
+      "domain": "research",
+      "query_type": "aggregation",
+      "query_name": "method_concept_matrix",
+      "natural_language": "Which methods are used for which concepts",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 20,
+      "graph_time_ms": 26.8,
+      "error": null
+    },
+    {
+      "domain": "research",
+      "query_type": "edge_cases",
+      "query_name": "empty_method",
+      "natural_language": "Papers using non-existent method 'quantum_blockchain'",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 0,
+      "graph_time_ms": 22.48,
+      "error": null
+    },
+    {
+      "domain": "research",
+      "query_type": "edge_cases",
+      "query_name": "case_sensitivity",
+      "natural_language": "Papers with 'TRANSFORMER' (case test)",
+      "vector_can_answer": true,
+      "graph_can_answer": true,
       "graph_results": 10,
-      "graph_time_ms": 4.27
+      "graph_time_ms": 32.44,
+      "error": null
+    },
+    {
+      "domain": "research",
+      "query_type": "edge_cases",
+      "query_name": "partial_match",
+      "natural_language": "Papers with methods containing 'tion' (partial)",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 2,
+      "graph_time_ms": 77.24,
+      "error": null
     },
     {
       "domain": "products",
       "query_type": "similarity",
-      "query_name": "product_search",
+      "query_name": "headphones_search",
       "natural_language": "Wireless headphones",
       "vector_can_answer": true,
       "graph_can_answer": true,
       "graph_results": 20,
-      "graph_time_ms": 4.45
+      "graph_time_ms": 101.78,
+      "error": null
+    },
+    {
+      "domain": "products",
+      "query_type": "similarity",
+      "query_name": "laptop_search",
+      "natural_language": "Gaming laptops",
+      "vector_can_answer": true,
+      "graph_can_answer": true,
+      "graph_results": 20,
+      "graph_time_ms": 139.11,
+      "error": null
     },
     {
       "domain": "products",
@@ -144,7 +317,8 @@
       "vector_can_answer": false,
       "graph_can_answer": true,
       "graph_results": 9,
-      "graph_time_ms": 3.39
+      "graph_time_ms": 84.09,
+      "error": null
     },
     {
       "domain": "products",
@@ -154,57 +328,228 @@
       "vector_can_answer": false,
       "graph_can_answer": true,
       "graph_results": 1,
-      "graph_time_ms": 3.33
+      "graph_time_ms": 53.17,
+      "error": null
     },
     {
       "domain": "products",
       "query_type": "intersection",
-      "query_name": "feature_x_feature_x_usecase",
-      "natural_language": "Waterproof AND wireless FOR workout",
+      "query_name": "feature_x_feature",
+      "natural_language": "Products that are BOTH wireless AND waterproof",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 45,
+      "graph_time_ms": 40.51,
+      "error": null
+    },
+    {
+      "domain": "products",
+      "query_type": "intersection",
+      "query_name": "triple_intersection",
+      "natural_language": "Wireless AND noise-canceling FOR travel",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 4,
+      "graph_time_ms": 38.49,
+      "error": null
+    },
+    {
+      "domain": "products",
+      "query_type": "intersection",
+      "query_name": "category_x_feature_x_price",
+      "natural_language": "Monitors with 4K under $500",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 9,
+      "graph_time_ms": 28.33,
+      "error": null
+    },
+    {
+      "domain": "products",
+      "query_type": "intersection",
+      "query_name": "brand_x_feature",
+      "natural_language": "Sony products with noise canceling",
       "vector_can_answer": false,
       "graph_can_answer": true,
       "graph_results": 2,
-      "graph_time_ms": 3.78
+      "graph_time_ms": 26.28,
+      "error": null
+    },
+    {
+      "domain": "products",
+      "query_type": "intersection",
+      "query_name": "usecase_x_price_range",
+      "natural_language": "Gaming products between $200-$400",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 31,
+      "graph_time_ms": 211.71,
+      "error": null
     },
     {
       "domain": "products",
       "query_type": "multi_hop",
-      "query_name": "bundle_recommendation",
-      "natural_language": "Products frequently bought with laptop X",
+      "query_name": "bought_together",
+      "natural_language": "Products frequently bought with laptops",
       "vector_can_answer": false,
       "graph_can_answer": true,
-      "graph_results": 2,
-      "graph_time_ms": 2.4
+      "graph_results": 9,
+      "graph_time_ms": 39.16,
+      "error": null
     },
     {
       "domain": "products",
       "query_type": "multi_hop",
       "query_name": "feature_migration",
-      "natural_language": "Premium features now in budget products",
+      "natural_language": "Premium features ($300+) now in budget products ($100-)",
       "vector_can_answer": false,
       "graph_can_answer": true,
       "graph_results": 10,
-      "graph_time_ms": 28.41
+      "graph_time_ms": 80.03,
+      "error": null
+    },
+    {
+      "domain": "products",
+      "query_type": "multi_hop",
+      "query_name": "brand_category_spread",
+      "natural_language": "Brands that sell in multiple categories",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 10,
+      "graph_time_ms": 60.83,
+      "error": null
+    },
+    {
+      "domain": "products",
+      "query_type": "multi_hop",
+      "query_name": "complementary_features",
+      "natural_language": "Features commonly paired together",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 15,
+      "graph_time_ms": 47.5,
+      "error": null
+    },
+    {
+      "domain": "products",
+      "query_type": "aggregation",
+      "query_name": "feature_popularity",
+      "natural_language": "Most common features",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 22,
+      "graph_time_ms": 18.74,
+      "error": null
+    },
+    {
+      "domain": "products",
+      "query_type": "aggregation",
+      "query_name": "usecase_popularity",
+      "natural_language": "Most targeted use cases",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 8,
+      "graph_time_ms": 19.47,
+      "error": null
+    },
+    {
+      "domain": "products",
+      "query_type": "aggregation",
+      "query_name": "price_by_category",
+      "natural_language": "Average price by category",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 8,
+      "graph_time_ms": 46.26,
+      "error": null
     },
     {
       "domain": "products",
       "query_type": "aggregation",
       "query_name": "niche_finder",
-      "natural_language": "Rare feature + use case combinations",
+      "natural_language": "Rare feature + use case combinations (underserved markets)",
       "vector_can_answer": false,
       "graph_can_answer": true,
-      "graph_results": 2,
-      "graph_time_ms": 18.3
+      "graph_results": 0,
+      "graph_time_ms": 41.93,
+      "error": null
+    },
+    {
+      "domain": "products",
+      "query_type": "aggregation",
+      "query_name": "brand_market_share",
+      "natural_language": "Products per brand",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 15,
+      "graph_time_ms": 21.59,
+      "error": null
+    },
+    {
+      "domain": "products",
+      "query_type": "edge_cases",
+      "query_name": "no_results_intersection",
+      "natural_language": "Waterproof laptops (unlikely combination)",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 0,
+      "graph_time_ms": 23.97,
+      "error": null
+    },
+    {
+      "domain": "products",
+      "query_type": "edge_cases",
+      "query_name": "price_boundary",
+      "natural_language": "Products at exactly $99.99",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 0,
+      "graph_time_ms": 24.8,
+      "error": null
+    },
+    {
+      "domain": "products",
+      "query_type": "edge_cases",
+      "query_name": "negation",
+      "natural_language": "Wireless products that are NOT for gaming",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 20,
+      "graph_time_ms": 36.38,
+      "error": null
     },
     {
       "domain": "neurology",
       "query_type": "similarity",
-      "query_name": "disease_papers",
+      "query_name": "alzheimers_papers",
       "natural_language": "Papers about Alzheimer's disease",
       "vector_can_answer": true,
       "graph_can_answer": true,
       "graph_results": 20,
-      "graph_time_ms": 200.79
+      "graph_time_ms": 26.71,
+      "error": null
+    },
+    {
+      "domain": "neurology",
+      "query_type": "similarity",
+      "query_name": "parkinsons_papers",
+      "natural_language": "Papers about Parkinson's disease",
+      "vector_can_answer": true,
+      "graph_can_answer": true,
+      "graph_results": 20,
+      "graph_time_ms": 8.75,
+      "error": null
+    },
+    {
+      "domain": "neurology",
+      "query_type": "similarity",
+      "query_name": "als_papers",
+      "natural_language": "Papers about ALS",
+      "vector_can_answer": true,
+      "graph_can_answer": true,
+      "graph_results": 20,
+      "graph_time_ms": 22.69,
+      "error": null
     },
     {
       "domain": "neurology",
@@ -214,7 +559,8 @@
       "vector_can_answer": false,
       "graph_can_answer": true,
       "graph_results": 5,
-      "graph_time_ms": 73.38
+      "graph_time_ms": 37.19,
+      "error": null
     },
     {
       "domain": "neurology",
@@ -224,17 +570,85 @@
       "vector_can_answer": false,
       "graph_can_answer": true,
       "graph_results": 20,
-      "graph_time_ms": 71.2
+      "graph_time_ms": 26.55,
+      "error": null
+    },
+    {
+      "domain": "neurology",
+      "query_type": "intersection",
+      "query_name": "disease_x_mechanism",
+      "natural_language": "Papers about Parkinson's discussing neuroinflammation",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 20,
+      "graph_time_ms": 24.84,
+      "error": null
+    },
+    {
+      "domain": "neurology",
+      "query_type": "intersection",
+      "query_name": "disease_x_treatment",
+      "natural_language": "Papers about Alzheimer's mentioning treatments",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 20,
+      "graph_time_ms": 22.28,
+      "error": null
+    },
+    {
+      "domain": "neurology",
+      "query_type": "intersection",
+      "query_name": "disease_x_region",
+      "natural_language": "Papers about Parkinson's mentioning brain regions",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 20,
+      "graph_time_ms": 23.59,
+      "error": null
+    },
+    {
+      "domain": "neurology",
+      "query_type": "intersection",
+      "query_name": "protein_x_mechanism",
+      "natural_language": "Papers mentioning tau AND oxidative stress",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 4,
+      "graph_time_ms": 40.18,
+      "error": null
     },
     {
       "domain": "neurology",
       "query_type": "comparison",
-      "query_name": "research_vs_patient",
-      "natural_language": "Symptoms patients report but research doesn't cover",
+      "query_name": "research_vs_patient_parkinsons",
+      "natural_language": "Symptoms patients report but research doesn't cover (Parkinson's)",
       "vector_can_answer": false,
       "graph_can_answer": true,
       "graph_results": 20,
-      "graph_time_ms": 7841.81
+      "graph_time_ms": 4314.36,
+      "error": null
+    },
+    {
+      "domain": "neurology",
+      "query_type": "comparison",
+      "query_name": "research_vs_patient_alzheimers",
+      "natural_language": "Symptoms patients report but research doesn't cover (Alzheimer's)",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 20,
+      "graph_time_ms": 1041.45,
+      "error": null
+    },
+    {
+      "domain": "neurology",
+      "query_type": "comparison",
+      "query_name": "research_only_symptoms",
+      "natural_language": "Symptoms in research but rarely reported by patients",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 20,
+      "graph_time_ms": 2463.53,
+      "error": null
     },
     {
       "domain": "neurology",
@@ -244,17 +658,52 @@
       "vector_can_answer": false,
       "graph_can_answer": true,
       "graph_results": 10,
-      "graph_time_ms": 217.75
+      "graph_time_ms": 330.54,
+      "error": null
+    },
+    {
+      "domain": "neurology",
+      "query_type": "multi_hop",
+      "query_name": "shared_mechanisms",
+      "natural_language": "Diseases sharing mechanisms with Parkinson's",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 10,
+      "graph_time_ms": 160.73,
+      "error": null
     },
     {
       "domain": "neurology",
       "query_type": "multi_hop",
       "query_name": "treatment_via_mechanism",
-      "natural_language": "Treatments targeting mechanisms involved in Parkinson's",
+      "natural_language": "Treatments targeting mechanisms in Parkinson's",
       "vector_can_answer": false,
       "graph_can_answer": true,
       "graph_results": 15,
-      "graph_time_ms": 245.34
+      "graph_time_ms": 8.96,
+      "error": null
+    },
+    {
+      "domain": "neurology",
+      "query_type": "multi_hop",
+      "query_name": "protein_disease_network",
+      "natural_language": "Proteins involved in multiple diseases",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 15,
+      "graph_time_ms": 96.94,
+      "error": null
+    },
+    {
+      "domain": "neurology",
+      "query_type": "multi_hop",
+      "query_name": "symptom_progression",
+      "natural_language": "Symptoms shared across disease progression stages",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 15,
+      "graph_time_ms": 257.26,
+      "error": null
     },
     {
       "domain": "neurology",
@@ -264,7 +713,74 @@
       "vector_can_answer": false,
       "graph_can_answer": true,
       "graph_results": 20,
-      "graph_time_ms": 250.43
+      "graph_time_ms": 526.72,
+      "error": null
+    },
+    {
+      "domain": "neurology",
+      "query_type": "aggregation",
+      "query_name": "disease_paper_count",
+      "natural_language": "Research papers per disease",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 15,
+      "graph_time_ms": 190.72,
+      "error": null
+    },
+    {
+      "domain": "neurology",
+      "query_type": "aggregation",
+      "query_name": "protein_research_focus",
+      "natural_language": "Most studied proteins",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 15,
+      "graph_time_ms": 131.8,
+      "error": null
+    },
+    {
+      "domain": "neurology",
+      "query_type": "aggregation",
+      "query_name": "mechanism_research_focus",
+      "natural_language": "Most studied mechanisms",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 15,
+      "graph_time_ms": 106.3,
+      "error": null
+    },
+    {
+      "domain": "neurology",
+      "query_type": "aggregation",
+      "query_name": "treatment_coverage",
+      "natural_language": "Treatments per disease",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 15,
+      "graph_time_ms": 85.77,
+      "error": null
+    },
+    {
+      "domain": "neurology",
+      "query_type": "edge_cases",
+      "query_name": "rare_disease",
+      "natural_language": "Papers about CJD (rare disease)",
+      "vector_can_answer": true,
+      "graph_can_answer": true,
+      "graph_results": 10,
+      "graph_time_ms": 168.16,
+      "error": null
+    },
+    {
+      "domain": "neurology",
+      "query_type": "edge_cases",
+      "query_name": "symptom_not_in_research",
+      "natural_language": "Patient symptoms with zero research papers",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 0,
+      "graph_time_ms": 148.82,
+      "error": null
     }
   ],
   "failure_cases": []

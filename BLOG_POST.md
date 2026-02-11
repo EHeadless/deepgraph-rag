@@ -216,14 +216,16 @@ The query "suppliers WITH ISO-9001 certification FOR automotive components IN Eu
 
 ## The Numbers: Evaluation Results
 
-I ran a formal evaluation across 21 test queries. The results were stark:
+I ran a formal evaluation across **65 test queries** covering 6 query types. The results were stark:
 
 | Metric | Vector Search | Graph RAG |
 |--------|:-------------:|:---------:|
-| **Overall Coverage** | 14.3% | 100% |
-| **Intersection Queries** | 0% | 100% |
-| **Multi-Hop Queries** | 0% | 100% |
-| **Similarity Queries** | 75% | 100% |
+| **Overall Coverage** | 15.4% (10/65) | 100% (65/65) |
+| **Intersection Queries** | 0% (0/18) | 100% |
+| **Multi-Hop Queries** | 0% (0/14) | 100% |
+| **Aggregation Queries** | 0% (0/14) | 100% |
+| **Comparison Queries** | 0% (0/3) | 100% |
+| **Similarity Queries** | 100% (8/8) | 100% |
 
 ### By Query Type
 
@@ -234,8 +236,9 @@ I ran a formal evaluation across 21 test queries. The results were stark:
 | Multi-Hop | "Collaborators of author X" | :x: | :white_check_mark: |
 | Aggregation | "Most popular methods" | :x: | :white_check_mark: |
 | Comparison | "Research vs patient symptoms" | :x: | :white_check_mark: |
+| Edge Cases | "Wireless NOT for gaming" (negation) | :x: | :white_check_mark: |
 
-**85.7% of test queries were Graph-RAG-only.**
+**84.6% of test queries (55/65) were Graph-RAG-only.**
 
 ### Precision Test: "Wireless headphones FOR workout under $100"
 
