@@ -85,7 +85,7 @@ Entity ──→ HAS_CAPABILITY ──→ Capability
 
 ```bash
 # Clone
-git clone https://github.com/yourusername/deepgraph-rag.git
+git clone https://github.com/EHeadless/deepgraph-rag.git
 cd deepgraph-rag
 
 # Install
