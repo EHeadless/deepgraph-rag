@@ -1,0 +1,99 @@
+schema:
+  name: arxiv_research
+
+  metadata:
+    description: "Graph schema for academic research papers from arXiv"
+    version: "1.0"
+    domains: ["AI", "ML", "CS"]
+    embedding_model: "text-embedding-ada-002"
+    embedding_dimensions: 1536
+
+  nodes:
+    Paper:
+      id_field: arxiv_id
+      properties:
+        arxiv_id: string
+        title: string
+        abstract: string
+        published_date: string
+        primary_category: string
+        embedding: vector
+      indexes:
+        - published_date
+        - primary_category
+      constraints:
+        - arxiv_id
+      vector_config:
+        field: embedding
+        dimensions: 1536
+        similarity: cosine
+        index_name: paper_embedding
+
+    Author:
+      id_field: name
+      properties:
+        name: string
+        institution: string
+      constraints:
+        - name
+
+    Concept:
+      id_field: name
+      properties:
+        name: string
+        field: string
+      constraints:
+        - name
+
+    Method:
+      id_field: name
+      properties:
+        name: string
+        category: string
+      constraints:
+        - name
+
+  edges:
+    AUTHORED_BY:
+      from: Paper
+      to: Author
+      properties:
+        position: integer
+
+    CO_AUTHORED:
+      from: Author
+      to: Author
+      properties:
+        shared_papers: integer
+
+    ABOUT_CONCEPT:
+      from: Paper
+      to: Concept
+
+    USES_METHOD:
+      from: Paper
+      to: Method
+
+    CITES:
+      from: Paper
+      to: Paper
+      properties:
+        citation_context: string
+
+retrieval:
+  vector_index_name: paper_embedding
+  default_top_k: 10
+  embedding_model: text-embedding-ada-002
+
+llm:
+  provider: openai
+  embedding_model: text-embedding-ada-002
+  chat_model: gpt-4-turbo-preview
+  temperature: 0.3
+  max_tokens: 1000
+
+database:
+  backend: neo4j
+  uri: bolt://localhost:7687
+  user: neo4j
+  password: deepgraph2025

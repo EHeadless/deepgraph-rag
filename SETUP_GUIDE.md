@@ -1,129 +1,100 @@
-# 🚀 DeepGraph RAG - Complete Setup Guide
+# Setup Guide
 
 ## Prerequisites
+
 - Python 3.11+
-- Docker Desktop
-- OpenAI API key (~$15-20 for full setup)
+- Docker
+- OpenAI API key
 
----
+## Quick Setup
 
-## Step 1: Clone the repo
 ```bash
-git clone https://github.com/EHeadless/deepgraph-rag.git
+# 1. Clone
+git clone https://github.com/yourusername/deepgraph-rag.git
 cd deepgraph-rag
-```
 
-## Step 2: Create Python environment
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-
-## Step 3: Install dependencies
-```bash
+# 2. Install dependencies
 pip install -r requirements.txt
-```
 
-## Step 4: Set up environment variables
-```bash
-cp .env.example .env
-```
-Edit `.env` and add your OpenAI API key:
-```
-OPENAI_API_KEY=sk-your-key-here
-```
+# 3. Configure environment
+cp env.example .env
+# Edit .env and add your OPENAI_API_KEY
 
-## Step 5: Start Neo4j database
-```bash
+# 4. Start Neo4j
 docker-compose up -d
-```
-*Wait 30 seconds for initialization.*
+# Wait 30 seconds for initialization
 
-## Step 6: Download papers from arXiv
-```bash
-python scripts/01_download_arxiv.py --categories cs.AI,cs.LG --max-papers 500
+# 5. Verify Neo4j is running
+open http://localhost:7474
+# Login: neo4j / deepgraph2025
 ```
 
-## Step 7: Extract entities with GPT-4
-```bash
-python extract_simple.py
-```
-*Uses GPT-4 to extract authors and concepts. Costs ~$10-15.*
+## Building Demo Data
 
-## Step 8: Build the knowledge graph
+### Research Demo (arXiv)
+
 ```bash
+python scripts/01_download_arxiv.py --max-papers 500
+python scripts/02_convert_arxiv_simple.py
 python scripts/03_build_graph.py
-```
-
-## Step 9: Create vector embeddings
-```bash
 python scripts/04_create_indexes.py
+python scripts/06_extract_concepts.py
 ```
-*Costs ~$2.*
 
-## Step 10: Add co-authorship relationships
+### Products Demo
+
 ```bash
-python scripts/05_add_citations.py
+python examples/products/scripts/build_product_graph.py
 ```
 
-## Step 11: Run the app
+### Neurology Demo
+
 ```bash
-python -m streamlit run app.py
+python examples/neurology/scripts/build_neurology_graph.py
 ```
-Open http://localhost:8501
 
-**Or the user-friendly research explorer:**
+## Running the Demos
+
 ```bash
-python -m streamlit run app_user_clouds.py
+# Landing page
+streamlit run landing.py --server.port 8500
+
+# Research Navigator
+streamlit run examples/arxiv/app.py --server.port 8505
+
+# Product Navigator
+streamlit run examples/products/app.py --server.port 8506
+
+# Neurology Navigator
+streamlit run examples/neurology/app.py --server.port 8507
 ```
 
----
+## Ports
 
-## 🛑 Stopping the App
+| Service | Port | URL |
+|---------|------|-----|
+| Landing | 8500 | http://localhost:8500 |
+| Research | 8505 | http://localhost:8505 |
+| Products | 8506 | http://localhost:8506 |
+| Neurology | 8507 | http://localhost:8507 |
+| Neo4j Browser | 7474 | http://localhost:7474 |
+| Neo4j Bolt | 7687 | bolt://localhost:7687 |
+
+## Troubleshooting
+
+### Neo4j won't start
 ```bash
-# Stop Streamlit: Ctrl+C
-
-# Stop Neo4j:
-docker-compose down
-
-# Deactivate environment:
-deactivate
+docker logs deepgraph-neo4j
+# Check if ports 7474/7687 are in use
+lsof -i :7474
 ```
 
----
-
-## 🔄 Quick Start (after initial setup)
+### No data in demos
 ```bash
-cd deepgraph-rag
-docker-compose up -d
-source venv/bin/activate
-python -m streamlit run app_user_clouds.py
+# Verify data exists in Neo4j Browser
+MATCH (n) RETURN labels(n), count(*)
 ```
 
----
-
-## 💰 Cost Summary
-
-| Step | Cost | Time |
-|------|------|------|
-| Download papers | Free | 5 min |
-| Extract entities | ~$10-15 | 30 min |
-| Create embeddings | ~$2 | 10 min |
-| **Total** | **~$12-17** | **~45 min** |
-
----
-
-## 📁 Project Structure
-```
-deepgraph-rag/
-├── app.py                    # Technical demo
-├── app_user_clouds.py        # User-friendly explorer
-├── docker-compose.yml        # Neo4j setup
-├── scripts/
-│   ├── 01_download_arxiv.py  # Download papers
-│   ├── 03_build_graph.py     # Build Neo4j graph
-│   ├── 04_create_indexes.py  # Create embeddings
-│   └── 05_add_citations.py   # Add relationships
-├── extract_simple.py         # GPT-4 entity extraction
-└── data/                     # Downloaded papers
-```
+### OpenAI errors
+- Verify OPENAI_API_KEY in .env
+- Check API quota at platform.openai.com

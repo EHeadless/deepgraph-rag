@@ -1,0 +1,46 @@
+# CRM Graph RAG Configuration
+#
+# This config file shows how to configure DeepGraph RAG for a CRM domain.
+# Load it with: pipeline = create_pipeline_from_yaml("config.yaml")
+
+database:
+  backend: neo4j
+  uri: bolt://localhost:7687
+  user: neo4j
+  # password loaded from NEO4J_PASSWORD env var
+
+llm:
+  # api_key loaded from OPENAI_API_KEY env var
+  embedding_model: text-embedding-ada-002
+  chat_model: gpt-4-turbo-preview
+
+retrieval:
+  vector_index_name: deal_embedding
+  node_label: Deal
+  id_field: deal_id
+  top_k: 10
+
+reasoning:
+  max_hops: 2
+  strategies:
+    - same_company      # Find other deals with same company
+    - network_referral  # Find deals through relationship network
+    - industry_similar  # Find deals in same industry
+
+pipeline:
+  type: multi_hop
+  use_planning: true
+  fallback_to_simple: true
+
+# CRM-specific settings
+domain:
+  name: crm
+  primary_node: Deal
+  relationship_nodes:
+    - Person
+    - Company
+  key_relationships:
+    - DEAL_WITH
+    - OWNS_DEAL
+    - KNOWS
+    - WORKS_AT
