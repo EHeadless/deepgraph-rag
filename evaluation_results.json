@@ -1,0 +1,271 @@
+{
+  "summary": {
+    "total_queries": 21,
+    "vector_answerable": 3,
+    "graph_answerable": 21,
+    "graph_only": 18,
+    "vector_coverage": 14.3,
+    "graph_coverage": 100.0,
+    "graph_advantage": 85.7
+  },
+  "by_domain": {
+    "research": {
+      "total": 7,
+      "vector_answerable": 1,
+      "graph_answerable": 7,
+      "graph_only": 6
+    },
+    "products": {
+      "total": 7,
+      "vector_answerable": 1,
+      "graph_answerable": 7,
+      "graph_only": 6
+    },
+    "neurology": {
+      "total": 7,
+      "vector_answerable": 1,
+      "graph_answerable": 7,
+      "graph_only": 6
+    }
+  },
+  "by_query_type": {
+    "similarity": {
+      "total": 4,
+      "vector_answerable": 3,
+      "graph_answerable": 4
+    },
+    "intersection": {
+      "total": 7,
+      "vector_answerable": 0,
+      "graph_answerable": 7
+    },
+    "multi_hop": {
+      "total": 6,
+      "vector_answerable": 0,
+      "graph_answerable": 6
+    },
+    "aggregation": {
+      "total": 3,
+      "vector_answerable": 0,
+      "graph_answerable": 3
+    },
+    "comparison": {
+      "total": 1,
+      "vector_answerable": 0,
+      "graph_answerable": 1
+    }
+  },
+  "detailed_results": [
+    {
+      "domain": "research",
+      "query_type": "similarity",
+      "query_name": "topic_search",
+      "natural_language": "Papers about transformer architectures",
+      "vector_can_answer": true,
+      "graph_can_answer": true,
+      "graph_results": 20,
+      "graph_time_ms": 14.95
+    },
+    {
+      "domain": "research",
+      "query_type": "similarity",
+      "query_name": "author_papers",
+      "natural_language": "Papers by a specific author",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 0,
+      "graph_time_ms": 12.53
+    },
+    {
+      "domain": "research",
+      "query_type": "intersection",
+      "query_name": "method_x_concept",
+      "natural_language": "Papers using transformers FOR reasoning",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 0,
+      "graph_time_ms": 2.47
+    },
+    {
+      "domain": "research",
+      "query_type": "intersection",
+      "query_name": "method_x_dataset",
+      "natural_language": "Papers using LoRA evaluated on MMLU",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 0,
+      "graph_time_ms": 2.14
+    },
+    {
+      "domain": "research",
+      "query_type": "multi_hop",
+      "query_name": "collaborator_network",
+      "natural_language": "Papers by collaborators of author X",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 0,
+      "graph_time_ms": 3.08
+    },
+    {
+      "domain": "research",
+      "query_type": "multi_hop",
+      "query_name": "method_transfer",
+      "natural_language": "Methods from NLP used in computer vision",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 10,
+      "graph_time_ms": 23.93
+    },
+    {
+      "domain": "research",
+      "query_type": "aggregation",
+      "query_name": "method_popularity",
+      "natural_language": "Most commonly used methods",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 10,
+      "graph_time_ms": 4.27
+    },
+    {
+      "domain": "products",
+      "query_type": "similarity",
+      "query_name": "product_search",
+      "natural_language": "Wireless headphones",
+      "vector_can_answer": true,
+      "graph_can_answer": true,
+      "graph_results": 20,
+      "graph_time_ms": 4.45
+    },
+    {
+      "domain": "products",
+      "query_type": "intersection",
+      "query_name": "feature_x_usecase",
+      "natural_language": "Wireless products FOR workout",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 9,
+      "graph_time_ms": 3.39
+    },
+    {
+      "domain": "products",
+      "query_type": "intersection",
+      "query_name": "feature_x_usecase_x_price",
+      "natural_language": "Wireless headphones FOR travel under $100",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 1,
+      "graph_time_ms": 3.33
+    },
+    {
+      "domain": "products",
+      "query_type": "intersection",
+      "query_name": "feature_x_feature_x_usecase",
+      "natural_language": "Waterproof AND wireless FOR workout",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 2,
+      "graph_time_ms": 3.78
+    },
+    {
+      "domain": "products",
+      "query_type": "multi_hop",
+      "query_name": "bundle_recommendation",
+      "natural_language": "Products frequently bought with laptop X",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 2,
+      "graph_time_ms": 2.4
+    },
+    {
+      "domain": "products",
+      "query_type": "multi_hop",
+      "query_name": "feature_migration",
+      "natural_language": "Premium features now in budget products",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 10,
+      "graph_time_ms": 28.41
+    },
+    {
+      "domain": "products",
+      "query_type": "aggregation",
+      "query_name": "niche_finder",
+      "natural_language": "Rare feature + use case combinations",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 2,
+      "graph_time_ms": 18.3
+    },
+    {
+      "domain": "neurology",
+      "query_type": "similarity",
+      "query_name": "disease_papers",
+      "natural_language": "Papers about Alzheimer's disease",
+      "vector_can_answer": true,
+      "graph_can_answer": true,
+      "graph_results": 20,
+      "graph_time_ms": 200.79
+    },
+    {
+      "domain": "neurology",
+      "query_type": "intersection",
+      "query_name": "disease_x_symptom",
+      "natural_language": "Papers about Parkinson's AND tremor",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 5,
+      "graph_time_ms": 73.38
+    },
+    {
+      "domain": "neurology",
+      "query_type": "intersection",
+      "query_name": "disease_x_protein",
+      "natural_language": "Papers about Alzheimer's mentioning tau protein",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 20,
+      "graph_time_ms": 71.2
+    },
+    {
+      "domain": "neurology",
+      "query_type": "comparison",
+      "query_name": "research_vs_patient",
+      "natural_language": "Symptoms patients report but research doesn't cover",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 20,
+      "graph_time_ms": 7841.81
+    },
+    {
+      "domain": "neurology",
+      "query_type": "multi_hop",
+      "query_name": "shared_symptoms",
+      "natural_language": "Diseases that share symptoms with Alzheimer's",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 10,
+      "graph_time_ms": 217.75
+    },
+    {
+      "domain": "neurology",
+      "query_type": "multi_hop",
+      "query_name": "treatment_via_mechanism",
+      "natural_language": "Treatments targeting mechanisms involved in Parkinson's",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 15,
+      "graph_time_ms": 245.34
+    },
+    {
+      "domain": "neurology",
+      "query_type": "aggregation",
+      "query_name": "symptom_frequency",
+      "natural_language": "Most reported symptoms across all diseases",
+      "vector_can_answer": false,
+      "graph_can_answer": true,
+      "graph_results": 20,
+      "graph_time_ms": 250.43
+    }
+  ],
+  "failure_cases": []
+}
