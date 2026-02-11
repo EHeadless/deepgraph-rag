@@ -1,49 +1,72 @@
 # DeepGraph RAG
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
+[![Neo4j 5.x](https://img.shields.io/badge/Neo4j-5.x-green.svg)](https://neo4j.com/)
+
 **Graph RAG for intersection queries. Find things that HAVE X FOR Y.**
 
-Vector search answers: *"Find things about X"*
-Graph RAG answers: *"Find things that have X for Y"*
+Vector search: *"Find things about X"*
+Graph RAG: *"Find things that HAVE X FOR Y"*
+
+<p align="center">
+  <img src="Screenshot.png" alt="DeepGraph RAG Demo" width="800"/>
+</p>
 
 ---
 
-## The Value
+## Why Graph RAG?
 
 Graph RAG solves one specific problem: **intersection queries across structured relationships**.
 
-| Query Type | Vector Search | Graph RAG |
-|------------|---------------|-----------|
-| "Papers about transformers" | Works | Works |
-| "Papers USING transformers FOR reasoning" | Fails | Works |
-| "Wireless headphones" | Works | Works |
-| "Wireless headphones FOR running under $100" | Fails | Works |
-| "Symptoms patients report but research ignores" | Impossible | Works |
-
-The pattern is portable. The value depends on the domain.
+| Query | Vector Search | Graph RAG |
+|-------|:-------------:|:---------:|
+| "Papers about transformers" | :white_check_mark: | :white_check_mark: |
+| "Papers USING transformers FOR reasoning" | :x: | :white_check_mark: |
+| "Wireless headphones" | :white_check_mark: | :white_check_mark: |
+| "Wireless headphones FOR running under $100" | :x: | :white_check_mark: |
+| "Symptoms patients report but research ignores" | :x: | :white_check_mark: |
 
 ---
 
-## Three Demos
+## Three Demos, One Pattern
 
-| Demo | Port | Killer Query | Data |
-|------|------|--------------|------|
-| **Research** | [8505](http://localhost:8505) | Method x Concept | 1,000 arXiv papers |
-| **Products** | [8506](http://localhost:8506) | Feature x UseCase x Price | 500 electronics |
-| **Neurology** | [8507](http://localhost:8507) | Research vs Patient gaps | 495 papers + 31K patient reports |
+<table>
+<tr>
+<td width="33%" align="center">
 
-```bash
-# Start all demos
-streamlit run landing.py --server.port 8500 &
-streamlit run examples/arxiv/app.py --server.port 8505 &
-streamlit run examples/products/app.py --server.port 8506 &
-streamlit run examples/neurology/app.py --server.port 8507 &
-```
+### :microscope: Research Navigator
+**Method x Concept**
 
----
+*"Papers using transformers for reasoning"*
 
-## The Pattern
+1,000 arXiv papers
 
-All three demos use the same graph structure:
+</td>
+<td width="33%" align="center">
+
+### :shopping_cart: Product Navigator
+**Feature x UseCase x Price**
+
+*"Wireless headphones for running under $100"*
+
+500 electronics products
+
+</td>
+<td width="33%" align="center">
+
+### :brain: Neurology Navigator
+**Research vs Patient Gaps**
+
+*"Symptoms patients report but research ignores"*
+
+495 papers + 31K patient reports
+
+</td>
+</tr>
+</table>
+
+All three use the same graph pattern:
 
 ```
 Entity ──→ HAS_CAPABILITY ──→ Capability
@@ -56,41 +79,32 @@ Entity ──→ HAS_CAPABILITY ──→ Capability
 | Products | Product | Feature | UseCase |
 | Neurology | Paper/Post | Symptom | Disease |
 
-The intersection query `Capability x Intent` is what vector search cannot do.
-
 ---
 
 ## Quick Start
 
 ```bash
-# Prerequisites
-# - Python 3.11+
-# - Docker (for Neo4j)
-# - OpenAI API key
-
-# Clone and setup
+# Clone
 git clone https://github.com/yourusername/deepgraph-rag.git
 cd deepgraph-rag
+
+# Install
 pip install -r requirements.txt
 
 # Configure
-cp env.example .env
-# Edit .env and add OPENAI_API_KEY
+cp .env.example .env
+# Add your OPENAI_API_KEY to .env
 
 # Start Neo4j
 docker-compose up -d
-# Wait 30 seconds for Neo4j to initialize
 
-# Build the graph (research demo)
-python scripts/01_download_arxiv.py --max-papers 500
-python scripts/02_convert_arxiv_simple.py
-python scripts/03_build_graph.py
-python scripts/04_create_indexes.py
-python scripts/06_extract_concepts.py
-
-# Run
-streamlit run examples/arxiv/app.py --server.port 8505
+# Run the landing page
+streamlit run landing.py --server.port 8500
 ```
+
+Then open http://localhost:8500
+
+See [SETUP_GUIDE.md](SETUP_GUIDE.md) for detailed instructions including data loading.
 
 ---
 
@@ -98,42 +112,69 @@ streamlit run examples/arxiv/app.py --server.port 8505
 
 ```
 deepgraph-rag/
-├── landing.py                 # Landing page
+├── landing.py                    # Main landing page
+├── api.py                        # FastAPI REST backend
+│
 ├── examples/
-│   ├── arxiv/                 # Research Navigator
-│   │   └── app.py             # Method x Concept queries
-│   ├── products/              # Product Navigator
-│   │   └── app.py             # Feature x UseCase queries
-│   └── neurology/             # Neurology Navigator
-│       └── app.py             # Research vs Patient comparison
-├── deepgraph/                 # Core library
-│   ├── core/schema.py         # Domain-agnostic schemas
-│   ├── store/neo4j.py         # Neo4j abstraction
-│   └── retrieval/vector.py    # Vector search
-├── scripts/                   # Data pipelines
-└── data/                      # Generated data (gitignored)
+│   ├── arxiv/                    # Research Navigator
+│   │   └── app.py                # Method x Concept queries
+│   ├── products/                 # Product Navigator
+│   │   └── app.py                # Feature x UseCase queries
+│   └── neurology/                # Neurology Navigator
+│       └── app.py                # Research vs Patient comparison
+│
+├── deepgraph/                    # Core library
+│   ├── core/schema.py            # Domain-agnostic schemas
+│   ├── store/neo4j.py            # Graph database
+│   └── retrieval/vector.py       # Vector search
+│
+├── scripts/                      # Data pipelines
+├── docker-compose.yml            # Neo4j setup
+└── requirements.txt
 ```
 
 ---
 
-## Honest Assessment
+## Ports
 
-| Demo | Differentiation | Notes |
-|------|-----------------|-------|
-| **Products** | High | Clear product-market fit. People shop by feature + use case + price. |
-| **Neurology** | High | Unique dual-source capability. Research gap analysis is impossible otherwise. |
-| **Research** | Medium | Researchers already have good tools (Semantic Scholar, Connected Papers). |
+| Service | Port | URL |
+|---------|------|-----|
+| Landing Page | 8500 | http://localhost:8500 |
+| Research Navigator | 8505 | http://localhost:8505 |
+| Product Navigator | 8506 | http://localhost:8506 |
+| Neurology Navigator | 8507 | http://localhost:8507 |
+| Neo4j Browser | 7474 | http://localhost:7474 |
+| REST API | 8000 | http://localhost:8000/docs |
 
 ---
 
-## Requirements
+## When to Use What
 
-- Python 3.11+
-- Neo4j 5.x (via Docker)
-- OpenAI API key (for embeddings and entity extraction)
+| Demo | Differentiation | Best For |
+|------|-----------------|----------|
+| **Products** | :star: High | E-commerce filtering. People think in Feature + UseCase + Price. |
+| **Neurology** | :star: High | Dual-source comparison. Research gap analysis is unique. |
+| **Research** | :star: Medium | Paper discovery. (Semantic Scholar already does this well.) |
+
+---
+
+## Tech Stack
+
+- **Graph Database:** Neo4j 5.x with vector indexes
+- **Embeddings:** OpenAI text-embedding-ada-002
+- **LLM:** GPT-4 for entity extraction
+- **UI:** Streamlit
+- **API:** FastAPI
+- **Visualization:** pyvis
+
+---
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ---
 
 ## License
 
-MIT
+MIT - see [LICENSE](LICENSE)
